@@ -26,11 +26,11 @@ const EditPage: React.FC<Props> = async ({ params }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const { params } = context;
   return {
     props: {
-      params,
+      params: params as unknown as Params,
     },
   };
 };
