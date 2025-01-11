@@ -1,27 +1,41 @@
+import { useRouter } from "next/router";
 import EditForm from "@/components/edit-form";
 import { getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
 
-interface Params {
+interface ImageData {
   id: string;
+  title: string;
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-interface Props {
-  params: Params;
-}
+const EditPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [data, setData] = useState<ImageData | null>(null);
 
-const EditPage = async ({ params }: Props) => {
-  // Mengambil data berdasarkan ID
-  const data = await getImagesById(params.id);
+  useEffect(() => {
+    if (id) {
+      getImagesById(id as string).then((result) => {
+        if (!result) {
+          notFound();
+        } else {
+          setData(result[0]);
+        }
+      });
+    }
+  }, [id]);
 
-  // Jika data tidak ditemukan, tampilkan halaman 404
-  if (!data) return notFound();
+  if (!data) return null;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
       <div className="bg-white rounded-sm shadow p-8">
         <h1 className="text-2xl font-bold mb-5">Update Image</h1>
-        <EditForm data={data[0]} />
+        <EditForm data={data} />
       </div>
     </div>
   );
