@@ -1,11 +1,11 @@
 "use client"
 import React from 'react'
 import { uploadImage } from '@/lib/action'
-import { useFormState } from 'react-dom'
+import { useActionState } from 'react'
 import { SubmitButton } from '@/components/button'
 
 const CreateForm = () => {
-    const [state, formActions] = useFormState(uploadImage, null);
+    const [state, formActions] = useActionState(uploadImage, null);
   return (
      <form action={formActions}>
         <div className="mb-4 pt-2">
