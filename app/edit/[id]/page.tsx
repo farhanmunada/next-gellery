@@ -1,5 +1,5 @@
-import EditForm from "@/components/edit-form"
-import { getImagesById } from "@/lib/data"
+import EditForm from "@/components/edit-form";
+import { getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 interface Params {
@@ -10,9 +10,11 @@ interface Props {
   params: Params;
 }
 
-const EditPage: React.FC<Props> = async ({ params }) => {
+const EditPage = async ({ params }: Props) => {
+  // Mengambil data berdasarkan ID
   const data = await getImagesById(params.id);
 
+  // Jika data tidak ditemukan, tampilkan halaman 404
   if (!data) return notFound();
 
   return (
