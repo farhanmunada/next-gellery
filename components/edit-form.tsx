@@ -1,12 +1,12 @@
 "use client"
 import React from 'react'
 import { updateImage } from '@/lib/action'
-import { useFormState } from 'react-dom'
+import { useActionState } from 'react'
 import { SubmitButton } from '@/components/button'
 import { Upload } from '@prisma/client'
 
 const EditForm = ({data} : {data : Upload}) => {
-    const [state, formActions] = useFormState(
+    const [state, formActions] = useActionState(
         updateImage.bind(null, data.id),
         null);
         

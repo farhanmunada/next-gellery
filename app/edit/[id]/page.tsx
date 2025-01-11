@@ -6,9 +6,9 @@ interface Params {
   id: string;
 }
 
-
 const EditPage = async ({ params }: { params: Params }) => {
-  const data = await getImagesById(params.id);
+  const { id } = params;
+  const data = await getImagesById(id);
 
   if (!data) return notFound();
 
