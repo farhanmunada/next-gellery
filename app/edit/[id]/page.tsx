@@ -1,7 +1,6 @@
 import EditForm from "@/components/edit-form"
 import { getImagesById } from "@/lib/data"
 import { notFound } from "next/navigation";
-import { GetServerSideProps } from "next";
 
 interface Params {
   id: string;
@@ -24,15 +23,6 @@ const EditPage: React.FC<Props> = async ({ params }) => {
       </div>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const { params } = context;
-  return {
-    props: {
-      params: params as unknown as Params,
-    },
-  };
 };
 
 export default EditPage;
